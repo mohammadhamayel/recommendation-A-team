@@ -252,10 +252,18 @@ class FrontController extends Controller
     public function show($id)
     {
 
+        $popularMovies = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/movie/popular')
+        ->json(['results']);
+
         $movie = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=credits,videos,images')
             ->json();
-        $viewModel = new MovieViewModel($movie);
+
+        $genres = Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/genre/movie/list')
+            ->json(['genres']);
+        $viewModel = new MovieViewModel($movie,$popularMovies,$genres);
 
         return view('front.pages.show', $viewModel);
     }

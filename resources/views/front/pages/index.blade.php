@@ -1,11 +1,42 @@
 @extends('layout.front')
 @section('content')
     <!-- home -->
+    <!-- Recommended Movies -->
     <section class="home">
+        @if(Auth::check())
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="home__title"><b>TOP</b> VIDEOs</h1>
+                    <h1 class="home__title"><b>Recommended</b> Movies</h1>
+
+                    <button class="recommend__nav recommend__nav--prev" type="button" data-nav="#recommend_videos">
+                        <i class="icon ion-ios-arrow-round-back"></i>
+                    </button>
+                    <button class="recommend__nav recommend__nav--next" type="button" data-nav="#recommend_videos">
+                        <i class="icon ion-ios-arrow-round-forward"></i>
+                    </button>
+                </div>
+
+                <div class="col-12">
+                    <div class="owl-carousel recommend__carousel recommend__carousel--bg" id="recommend_videos">
+                        {{-- Popular/Trending Movie Single container --}}
+                            {{-- Dynamic Content From TMDB API --}}
+                        @foreach ($popularMovies as $movie)
+                            <x-MovieCardCpy :movie="$movie"/>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+    </section>
+
+    <!-- Top Movies -->
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="home__title"><b>TOP</b> Movies</h1>
 
                     <button class="home__nav home__nav--prev" type="button" data-nav="#top_videos">
                         <i class="icon ion-ios-arrow-round-back"></i>
@@ -33,7 +64,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 class="home__title"><b>NEW</b> VIDEOs</h1>
+                    <h1 class="home__title"><b>NEW</b> Movies</h1>
 
                     <button class="new__nav new__nav--prev" type="button" data-nav="#new_videos">
                         <i class="icon ion-ios-arrow-round-back"></i>
@@ -64,7 +95,7 @@
                 <div class="row">
                     <div class="col-12">
                         <!-- content title -->
-                        <h2 class="content__title">MORE VIDEOS</h2>
+                        <h2 class="content__title">Genres</h2>
                         <!-- end content title -->
 
                         <!-- content tabs nav -->

@@ -17,6 +17,86 @@ $(document).ready(function () {
 	/*==============================
 	Home
 	==============================*/
+	$('.recommend__carousel--bg').owlCarousel({
+		mouseDrag: false,
+		touchDrag: true,
+		dots: false,
+		loop: false,
+        rewind: true,
+		autoplay: false,
+		smartSpeed: 700,
+		margin: 20,
+		responsive : {
+			0 : {
+				items: 2,
+			},
+			576 : {
+				items: 2,
+			},
+			768 : {
+				items: 3,
+				margin: 30,
+			},
+			992 : {
+				items: 4,
+				margin: 30,
+			},
+			1200 : {
+				items: 5,
+				margin: 30,
+			}
+		}
+	});
+
+	$('.recommend__carousel--default').owlCarousel({
+		mouseDrag: false,
+		touchDrag: true,
+		dots: false,
+		loop: false,
+        rewind: true,
+		autoplay: false,
+		smartSpeed: 700,
+		margin: 20,
+		responsive : {
+			0 : {
+				items: 2,
+			},
+			576 : {
+				items: 2,
+			},
+			768 : {
+				items: 3,
+				margin: 30,
+			},
+			992 : {
+				items: 4,
+				margin: 30,
+			},
+			1200 : {
+				items: 5,
+				margin: 30,
+				slideBy: 5,
+				smartSpeed: 400,
+			}
+		}
+	});
+
+	$('.recommend__nav--next').on('click', function() {
+		$('.recommend__carousel--default, .recommend__carousel--bg, .home__bg').trigger('next.owl.carousel');
+	});
+	$('.recommend__nav--prev').on('click', function() {
+		$('.recommend__carousel--default, .recommend__carousel--bg, .home__bg').trigger('prev.owl.carousel');
+	});
+
+	$(window).on('resize', function() {
+		var itemHeight = $('.recommend__bg').height();
+		$('.recommend__bg .item').css("height", itemHeight + "px");
+	});
+	$(window).trigger('resize');
+
+	/*==============================
+	Home
+	==============================*/
 	$('.home__carousel--bg').owlCarousel({
 		mouseDrag: false,
 		touchDrag: true,

@@ -163,4 +163,34 @@
             @endif
     </div>
     <!-- movie images-end -->
+
+    <!-- similar movie  -->
+    <section class="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="home__title"><b>Similar</b> Movies</h1>
+
+                    <button class="recommend__nav recommend__nav--prev" type="button" data-nav="#recommend_videos">
+                        <i class="icon ion-ios-arrow-round-back"></i>
+                    </button>
+                    <button class="recommend__nav recommend__nav--next" type="button" data-nav="#recommend_videos">
+                        <i class="icon ion-ios-arrow-round-forward"></i>
+                    </button>
+                </div>
+
+                <div class="col-12">
+                    <div class="owl-carousel recommend__carousel recommend__carousel--bg" id="recommend_videos">
+                        {{-- Popular/Trending Movie Single container --}}
+                            {{-- Dynamic Content From TMDB API --}}
+                        @foreach ($popularMovies as $movie)
+                            <x-MovieCardCpy :movie="$movie"/>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- similar movie end -->
+
 @endsection
