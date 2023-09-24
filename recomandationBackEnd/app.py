@@ -39,9 +39,5 @@ def top10NewMovies():
 def top10PerGenre(genre):
     return MovieView.top10PerGenre(genre)
 
-@app.route('/api/movies/combinedTop10', methods=['GET'])
-def combinedTop10():
-    return MovieView.top10NewMovies()
-
 if __name__ == '__main__':
     app.run(debug=True)
