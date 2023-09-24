@@ -64,3 +64,18 @@
 .box-image{
     width: -webkit-fill-available;
 }
+.rating {
+    width: 180px;
+ }
+ 
+ .rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+ }
+ .red{
+    color: red;
+    font-weight: bold;
+ }
+ .v-none{
+    visibility: hidden;
+ }

@@ -267,4 +267,22 @@ class FrontController extends Controller
 
         return view('front.pages.show', $viewModel);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function rate(Request $request)
+    {
+        $rate = $request->rate;
+        dd($rate);
+        
+
+        return array(
+            'status' => 1,
+            'message' => "success"
+        );
+    }
 }

@@ -15,7 +15,7 @@
 	<link rel="stylesheet" href="{{asset('front/css/default-skin.css')}}">
 	<link rel="stylesheet" href="{{asset('front/css/main.css')}}">
 	<link rel="stylesheet" href="{{asset('front/css/app.css')}}">
-
+	<script src="https://kit.fontawesome.com/9089d11988.js" crossorigin="anonymous"></script>
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="{{asset('front/icon/favicon-32x32.png')}}" sizes="32x32">
 	<link rel="apple-touch-icon" href="{{asset('front/icon/favicon-32x32.png')}}">

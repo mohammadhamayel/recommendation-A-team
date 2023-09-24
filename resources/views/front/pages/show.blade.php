@@ -26,6 +26,7 @@
                         <span>
                                 {{ $movie['genres'] }}
                         </span>
+                        
                     </div>
                         <p class="text-gray-600 mt-3">
                             {{ $movie['overview'] }}
@@ -50,10 +51,31 @@
                                 @endforeach
                             </div>
                         </div>
+                        <div class="mt-5">
+                            <h4 class="text-teal-400">Rate Me</h4>
+                            <div class="rating mt-2">
+                                <i class="rating__star far fa-star" onclick="getStars()"></i>
+                                <i class="rating__star far fa-star" onclick="getStars()"></i>
+                                <i class="rating__star far fa-star" onclick="getStars()"></i>
+                                <i class="rating__star far fa-star" onclick="getStars()"></i>
+                                <i class="rating__star far fa-star" onclick="getStars()"></i>
+                            </div>
+                            <div class="mt-1">
+                                <p class="rateState red v-none" id="rateState">Please Select a Rate</p>
+                            </div>
+                            <div class="mt-3">
+                                <button
+                                    onclick="sendRate()"
+                                    class="inline-flex items-center bg-teal-400 text-white rounded font-semibold px-4 py-3 hover:bg-teal-600 transition ease-in-out duration-150">
+                                    <span class="ml-2">Send Rate</span>
+                                </button>
+                            </div>
+                        <div class="mt-4">
+                        
                         <div x-data="{ isOpen: false }">
 
                             {{-- Check if there is a video --}}
-                            @if (count($movie['videos']['results']) > 0)
+                            @if (false && count($movie['videos']['results']) > 0)
                                 <div class="mt-5">
                                     <button
                                         @click="isOpen = true"
@@ -194,3 +216,43 @@
     <!-- similar movie end -->
 
 @endsection
+<script>
+    function getStars(){
+        const ratingStars = [...document.getElementsByClassName("rating__star")];
+        executeRating(ratingStars);
+    }
+
+    function executeRating(stars) {
+        const starClassActive = "rating__star fas fa-star";
+        const starClassInactive = "rating__star far fa-star";
+        const starsLength = stars.length;
+        let i;
+        stars.map((star) => {
+            star.onclick = () => {
+            i = stars.indexOf(star);
+
+            if (star.className===starClassInactive) {
+                for (i; i >= 0; --i) stars[i].className = starClassActive;
+            } 
+            else {
+                for (i; i < starsLength; ++i) stars[i].className = starClassInactive;
+            }
+            };
+        });
+    }
+
+    function sendRate(){
+        let rating = document.getElementsByClassName("fas").length;
+        
+        if(rating < 1){
+            document.getElementById("rateState").classList.remove("v-none");
+            return;
+        }else
+            document.getElementById("rateState").classList.add("v-none");
+
+        $.post('{{ route('front.movies.rate') }}', {_token:'{{ csrf_token() }}', rate:rating}, function(data){
+            console.log('data',data);
+        });
+    }
+
+</script>
