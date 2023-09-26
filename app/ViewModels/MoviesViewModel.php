@@ -11,13 +11,15 @@ class MoviesViewModel extends ViewModel
     public $popularMovies;
     public $nowPlayingMovies;
     public $genres;
+    public $firstGenre;
 
     // Constructor
-    public function __construct($popularMovies,$nowPlayingMovies,$genres)
+    public function __construct($popularMovies,$nowPlayingMovies,$genres,$firstGenre)
     {
         $this->popularMovies = $popularMovies;
         $this->nowPlayingMovies = $nowPlayingMovies;
         $this->genres = $genres;
+        $this->firstGenre = $firstGenre;
     }
 
     // Getters
@@ -31,6 +33,9 @@ class MoviesViewModel extends ViewModel
             return  $genres = collect($this->genres)->mapWithKeys(function ($genre){
                 return[$genre['id'] =>$genre['name']];
             });
+    }
+    public function firstGenre(){
+        return $this->formatMovies($this->firstGenre);
     }
 
     private function formatMovies($movies){

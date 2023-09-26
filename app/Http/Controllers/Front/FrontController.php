@@ -20,10 +20,11 @@ use App\Notifications\Subscriptions\CreatedSubscription;
 use Illuminate\Support\Facades\Http;
 use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
+use App\ViewModels\GenreViewModel;
 
 class FrontController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
 
         if(session()->has('checkout_plan')){
 
@@ -33,27 +34,45 @@ class FrontController extends Controller
 
             return response()->json(['redirect' => route('front.checkout', $plan->id)], 200);
         }
+        
          // Http Client From themoviedb, get popular movies from api
-         $popularMovies = Http::withToken(config('services.tmdb.token'))
-         ->get('https://api.themoviedb.org/3/movie/popular')
-         ->json(['results']);
+        //  $popularMovies = Http::withToken(config('services.tmdb.token'))
+        //  ->get('https://api.themoviedb.org/3/movie/popular')
+        //  ->json(['results']);
 
+         $popularMovies = Http::withToken(config('services.tmdb.token'))
+         ->get('http://127.0.0.1:5000/api/movies/top10RatedMovies')
+         ->json(['results']);
+        // dd($popularMovies["first_air_date"]);
         // Http Client From themoviedb, get now playing movies from api
+        // $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
+        //     ->get('https://api.themoviedb.org/3/movie/now_playing')
+        //     ->json()['results'];
         $nowPlayingMovies = Http::withToken(config('services.tmdb.token'))
-            ->get('https://api.themoviedb.org/3/movie/now_playing')
+            ->get('http://127.0.0.1:5000/api/movies/top10NewMovies')
             ->json()['results'];
         // Get Genres
         $genres = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/genre/movie/list')
             ->json(['genres']);
 
+        $firstGenre = Http::withToken(config('services.tmdb.token'))
+            ->get('http://127.0.0.1:5000/api/movies/top10PerGenre/drama')
+            ->json()['results'];
+
 
         $viewModel = new MoviesViewModel(
             $popularMovies,
             $nowPlayingMovies,
             $genres,
+            $firstGenre
         );
 
+        if(!$request->session()->get('temp_user_id')){
+            $randNum = time() + rand() ;
+            $request->session()->put('temp_user_id', intval(substr(time() + rand(),0,9)));
+        }
+            
         return view('front.pages.index',$viewModel);
     }
 
@@ -277,12 +296,49 @@ class FrontController extends Controller
     public function rate(Request $request)
     {
         $rate = $request->rate;
-        dd($rate);
-        
+        $movieId = $request->movieId;
 
+        $data = [
+            'userId' => Auth::check()?Auth::user()->id:$request->session()->get('temp_user_id'),
+            'actionEvent' => 'rate',
+            'movieId' => $movieId,
+            'rating' => $rate,
+            'recommendedMovies' => '',
+        ];
+        dd($data);
+        $response = Http::post('http://127.0.0.1:5000/api/userLog/add', $data);
+        
         return array(
             'status' => 1,
             'message' => "success"
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function getMoviesPerGenre(Request $request)
+    {
+        $genreName = $request->genreName;
+
+        $genreMovie = Http::withToken(config('services.tmdb.token'))
+         ->get('http://127.0.0.1:5000/api/movies/top10PerGenre/'.$genreName)
+         ->json(['results']);
+
+
+        $genres = Http::withToken(config('services.tmdb.token'))
+        ->get('https://api.themoviedb.org/3/genre/movie/list')
+        ->json(['genres']);
+
+        $viewModel = new GenreViewModel($genreMovie,$genres);
+
+        return array(
+            'status' => 1,
+            'message' => "success",
+            'data'=>$viewModel
         );
     }
 }

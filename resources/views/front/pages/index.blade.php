@@ -100,21 +100,45 @@
 
                         <!-- content tabs nav -->
                         <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">RECENT</a>
+                            <li class="nav-item" onClick="getGenre('drama')">
+                                <a class="nav-link active" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-1" aria-selected="true" data="Drama">Drama</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">ACTION</a>
+                            <li class="nav-item" onClick="getGenre('comedy')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-2" aria-selected="false">Comedy</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">ADVENTURE</a>
+                            <li class="nav-item" onClick="getGenre('thriller')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-3" aria-selected="false">Thriller</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">COMEDY</a>
+                            <li class="nav-item" onClick="getGenre('romance')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Romance</a>
                             </li>
+                            <li class="nav-item" onClick="getGenre('action')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Action</a>
+                            </li>
+
+                            <li class="nav-item" onClick="getGenre('horror')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Horror</a>
+                            </li>
+
+                            <li class="nav-item" onClick="getGenre('documentary')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Documentary</a>
+                            </li>
+
+                            <li class="nav-item" onClick="getGenre('crime')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Crime</a>
+                            </li>
+
+                            <li class="nav-item" onClick="getGenre('adventure')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Adventure</a>
+                            </li>
+
+                            <li class="nav-item" onClick="getGenre('children')">
+                                <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Children</a>
+                            </li>
+
                         </ul>
                         <!-- end content tabs nav -->
 
@@ -146,61 +170,7 @@
         <div class="container">
             <!-- content tabs -->
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="tab-1" role="tabpanel" aria-labelledby="1-tab">
-                    <div class="row row--grid">
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
-                    <div class="row row--grid">
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="tab-3" role="tabpanel" aria-labelledby="3-tab">
-                    <div class="row row--grid">
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="4-tab">
+                <div class="active show" id="tab-4" role="tabpanel" aria-labelledby="4-tab">
                     <div class="row row--grid">
                        <!-- section title -->
                         <div class="col-12">
@@ -208,7 +178,7 @@
                                 <h2 class="section__title"></h2>
 
                                 <div class="section__nav-wrap">
-                                    <a href="#" class="section__view">See all</a>
+                                    <a href="#" class="section__view d-none">See all</a>
 
                                     <button class="section__nav section__nav--prev" type="button" data-nav="#carousel1">
                                         <i class="icon ion-ios-arrow-back"></i>
@@ -225,7 +195,7 @@
                         <!-- carousel -->
                         <div class="col-12">
                             <div class="owl-carousel section__carousel" id="carousel1">
-                                @foreach ($popularMovies as $movie)
+                                @foreach ($firstGenre as $movie)
                                     <x-MovieCardCpy :movie="$movie"/>
                                 @endforeach
                             </div>
@@ -268,3 +238,18 @@
     @endguest
     @endif
 @endsection
+<script>
+
+    function getGenre(genreName){
+        $.post('{{ route('front.genre.getmovie') }}', {_token:'{{ csrf_token() }}', genreName:genreName}, function(data){
+            console.log('data',data.data.genreMovies);
+            let movieArray = data.data.genreMovies;
+            // var html = '';
+            // Array.prototype.forEach.call(movieArray, movie => {
+            // });
+            // console.log(html);
+
+        });
+    }
+
+</script>

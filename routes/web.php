@@ -56,6 +56,8 @@ Route::group([
 
     Route::post('/movies/rate',  [FrontController::class, 'rate'])->name('movies.rate');
 
+    Route::post('/movies/genreMovies',  [FrontController::class, 'getMoviesPerGenre'])->name('genre.getmovie');
+
 });
 
 

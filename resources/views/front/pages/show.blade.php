@@ -62,15 +62,19 @@
                             </div>
                             <div class="mt-1">
                                 <p class="rateState red v-none" id="rateState">Please Select a Rate</p>
+                                <p class="rateState red d-none" id="rateError">A Problem Habened, Please Rate Again Later</p>
                             </div>
-                            <div class="mt-3">
+                            <div class="mt-3 " id="rateBtn">
                                 <button
                                     onclick="sendRate()"
                                     class="inline-flex items-center bg-teal-400 text-white rounded font-semibold px-4 py-3 hover:bg-teal-600 transition ease-in-out duration-150">
                                     <span class="ml-2">Send Rate</span>
                                 </button>
                             </div>
-                        <div class="mt-4">
+                            <div class="my-3 d-none" id="ratingTxt">
+                                <p class="rateState fs-27">Thank You For Your Valuable Feedback</p>
+                            </div>
+                        <div>
                         
                         <div x-data="{ isOpen: false }">
 
@@ -120,7 +124,7 @@
     <!-- Movie-Info-Ends -->
 
     <!-- cast-start -->
-    <div class="movie-cast border-b border-t border-teal-400">
+    <div class="movie-cast border-b border-t border-teal-400 mt-3">
         <div class="container mx-auto px-4 py-16">
             <h2 class="text-4xl font-semibold text-wight text-white">Cast</h2>
             <div class="row">
@@ -250,8 +254,18 @@
         }else
             document.getElementById("rateState").classList.add("v-none");
 
-        $.post('{{ route('front.movies.rate') }}', {_token:'{{ csrf_token() }}', rate:rating}, function(data){
+        $.post('{{ route('front.movies.rate') }}', {_token:'{{ csrf_token() }}', rate:rating,movieId:{{$movie['id']}}}, function(data){
             console.log('data',data);
+            if(data.status){
+                document.getElementById("rateBtn").classList.add("d-none");
+                document.getElementById("ratingTxt").classList.remove("d-none");
+            }else{
+                document.getElementById("rateError").classList.remove("d-none");
+                document.getElementById("rateState").classList.add("d-none");
+
+            }
+            
+
         });
     }
 
