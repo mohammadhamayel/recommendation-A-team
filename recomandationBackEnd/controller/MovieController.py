@@ -8,9 +8,9 @@ from recomandationBackEnd.model.MovieResponse import MovieResponse, Movie
 def top10RatedMovies():
     engine = db.get_engine()
     query = text("""
-            SELECT movieid,title,rating,RatingCount,AvgRating,tmdbId
+            SELECT movieid,title,RatingCount,AvgRating,tmdbId
             FROM top_rated_movies
-            WHERE Rating > 4
+            WHERE AvgRating > 4
             ORDER BY RatingCount DESC
             LIMIT 10;
         """)
@@ -52,7 +52,7 @@ def top10NewMovies():
     query = text("""
                 SELECT movieid,RatingCount,AvgRating,release_date,tmdbId
                 FROM top_rated_movies
-                WHERE Rating > 3
+                WHERE AvgRating > 3
                 AND release_date >= '2019-01-01'
                 ORDER BY RatingCount DESC
                 LIMIT 10;
@@ -95,7 +95,7 @@ def top10PerGenre(genre):
     query = text("""
                     SELECT  MovieID,Title,RatingCount,AvgRating ,tmdbId
                     FROM top_rated_movies
-                    WHERE Rating > 4
+                    WHERE AvgRating > 4
                     and genres like :genre
                     ORDER BY RatingCount DESC
                     LIMIT 10;
