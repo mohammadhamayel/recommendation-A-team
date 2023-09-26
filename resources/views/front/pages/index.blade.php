@@ -202,41 +202,35 @@
 
                 <div class="tab-pane fade" id="tab-4" role="tabpanel" aria-labelledby="4-tab">
                     <div class="row row--grid">
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
+                       <!-- section title -->
+                        <div class="col-12">
+                            <div class="section__title-wrap">
+                                <h2 class="section__title"></h2>
 
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
+                                <div class="section__nav-wrap">
+                                    <a href="#" class="section__view">See all</a>
 
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
+                                    <button class="section__nav section__nav--prev" type="button" data-nav="#carousel1">
+                                        <i class="icon ion-ios-arrow-back"></i>
+                                    </button>
 
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
+                                    <button class="section__nav section__nav--next" type="button" data-nav="#carousel1">
+                                        <i class="icon ion-ios-arrow-forward"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <!-- end card -->
+                        <!-- end section title -->
 
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
+                        <!-- carousel -->
+                        <div class="col-12">
+                            <div class="owl-carousel section__carousel" id="carousel1">
+                                @foreach ($popularMovies as $movie)
+                                    <x-MovieCardCpy :movie="$movie"/>
+                                @endforeach
+                            </div>
                         </div>
-                        <!-- end card -->
-
-                        <!-- card -->
-                        <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <x-MovieCard />
-                        </div>
-                        <!-- end card -->
+                        <!-- carousel -->
                     </div>
                 </div>
             </div>
@@ -245,42 +239,7 @@
     </section>
     <!-- end content -->
 
-    <!-- section -->
-    <section class="section section--border">
-        <div class="container">
-            <div class="row">
-                <!-- section title -->
-                <div class="col-12">
-                    <div class="section__title-wrap">
-                        <h2 class="section__title">Comedy</h2>
-
-                        <div class="section__nav-wrap">
-                            <a href="#" class="section__view">See all</a>
-
-                            <button class="section__nav section__nav--prev" type="button" data-nav="#carousel1">
-                                <i class="icon ion-ios-arrow-back"></i>
-                            </button>
-
-                            <button class="section__nav section__nav--next" type="button" data-nav="#carousel1">
-                                <i class="icon ion-ios-arrow-forward"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- end section title -->
-
-                <!-- carousel -->
-                <div class="col-12">
-                    <div class="owl-carousel section__carousel" id="carousel1">
-                        <x-MovieCard />
-                    </div>
-                </div>
-                <!-- carousel -->
-            </div>
-        </div>
-    </section>
-    <!-- end section -->
-
+    @if(false)
     @guest()
         <!-- plans -->
         <section class="section section--border">
@@ -307,4 +266,5 @@
         </section>
         <!-- end plans -->
     @endguest
+    @endif
 @endsection
