@@ -46,11 +46,11 @@ def recommendedUserMovies(userId, refined_dataset_nn, user_enc, rec_model):
         return jsonify({'message': 'No Movies found'}), 404
 
 
-def recommendedSimilarMovies(movieName, refined_dataset_nn, knn_similar_movie_model, movie_to_user_df, movies_list,
-                             movie_dict, movie_title_id_dict):
-    movies = MovieController.recommendedSimilarMovies(movieName, refined_dataset_nn, knn_similar_movie_model,
+def recommendedSimilarMovies(movieId, refined_dataset_nn, knn_similar_movie_model, movie_to_user_df, movies_list,
+                             movie_dict):
+    movies = MovieController.recommendedSimilarMovies(movieId, refined_dataset_nn, knn_similar_movie_model,
                                                       movie_to_user_df, movies_list,
-                                                      movie_dict, movie_title_id_dict)
+                                                      movie_dict)
 
     if movies:
         movie_response_schema = MovieResponseSchema()

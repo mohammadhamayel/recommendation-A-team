@@ -21,15 +21,17 @@ logger.addHandler(console_handler)
 
 
 # Function to log request and response details
-def log_request_response_details(request, response):
+def log_request_response_details(request=None, response=None):
     try:
         # Log the request method, path, and headers
-        logger.info(f'Request Method: {request.method}')
-        logger.info(f'Request Path: {request.path}')
-        logger.info(f'Request Headers: {dict(request.headers)}')
+        if request is not None:
+            logger.info(f'Request Method: {request.method}')
+            logger.info(f'Request Path: {request.path}')
+            logger.info(f'Request Headers: {dict(request.headers)}')
 
-        # Log the response status code, body, and headers
-        logger.info(f'Response : {response}')
+        if response is not None:
+            # Log the response status code, body, and headers
+            logger.info(f'Response : {response}')
 
 
     except Exception as e:

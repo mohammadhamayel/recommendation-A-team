@@ -22,7 +22,8 @@ def get_movie_info(tmdbId):
         movie_info = MovieExternalModel(
             adult=json_data["adult"],
             backdrop_path=json_data["backdrop_path"],
-            belongs_to_collection=json_data["belongs_to_collection"] if json_data.get("belongs_to_collection") else None,
+            belongs_to_collection=json_data["belongs_to_collection"] if json_data.get(
+                "belongs_to_collection") else None,
             budget=json_data["budget"],
             genres=[Genre(**genre_data) for genre_data in json_data["genres"]],
             homepage=json_data.get("homepage"),

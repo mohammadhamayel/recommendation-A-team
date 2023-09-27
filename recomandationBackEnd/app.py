@@ -22,12 +22,11 @@ knn_similar_movie_model = None
 movie_to_user_df = None
 movies_list = None
 movie_dict = None
-movie_title_id_dict = None
 
 
 def before_first_request():
     global refined_dataset_nn, rec_model, user_enc, item_enc, knn_similar_movie_model, \
-        movie_to_user_df, movies_list, movie_dict, movie_title_id_dict
+        movie_to_user_df, movies_list, movie_dict
 
     try:
         # Load CSV data into a Pandas DataFrame
@@ -42,9 +41,9 @@ def before_first_request():
         refined_dataset_nn, user_enc, item_enc = encode_data(refined_dataset_nn, 'userId', 'title', 'rating')
 
         # Load Similar Model
-        similar_model_path = './mlmodel/similarmovie_recommendation_model.pkl'
+        similar_model_path = './mlmodel/similarmovie_recommendation_model2.pkl'
         knn_similar_movie_model = load_similar_model(similar_model_path)
-        movie_to_user_df, movies_list, movie_dict, movie_title_id_dict = prepare_knn(refined_dataset_nn)
+        movie_to_user_df, movies_list, movie_dict = prepare_knn(refined_dataset_nn)
 
     except Exception as e:
         app.logger.error(f"Error during model and data initialization: {str(e)}")
@@ -70,8 +69,9 @@ def handle_global_error(error):
 @app.route('/api/userLog/add', methods=['POST'])
 def add_user_log():
     try:
+        log_request_response_details(request)
         response = UserLogView.add_user_log(request)
-        log_request_response_details(request, response)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
@@ -80,8 +80,9 @@ def add_user_log():
 @app.route('/api/userLog/get/<int:logId>', methods=['GET'])
 def get_user_log(logId):
     try:
+        log_request_response_details(request)
         response = UserLogView.get_user_log(logId)
-        log_request_response_details(request, response)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
@@ -90,19 +91,21 @@ def get_user_log(logId):
 @app.route('/api/recommendation/perUser/<int:userId>', methods=['GET'])
 def recommended_per_user(userId):
     try:
+        log_request_response_details(request)
         response = MovieView.recommendedUserMovies(userId, refined_dataset_nn, user_enc, rec_model)
-        log_request_response_details(request, response)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
 
 
-@app.route('/api/recommendation/perMovie/<string:movieName>', methods=['GET'])
-def recommended_per_movie(movieName):
+@app.route('/api/recommendation/perMovie/<int:movieId>', methods=['GET'])
+def recommended_per_movie(movieId):
     try:
-        response = MovieView.recommendedSimilarMovies(movieName, refined_dataset_nn, knn_similar_movie_model,
-                                                      movie_to_user_df, movies_list, movie_dict, movie_title_id_dict)
-        log_request_response_details(request, response)
+        log_request_response_details(request)
+        response = MovieView.recommendedSimilarMovies(movieId, refined_dataset_nn, knn_similar_movie_model,
+                                                      movie_to_user_df, movies_list, movie_dict)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
@@ -111,8 +114,9 @@ def recommended_per_movie(movieName):
 @app.route('/api/movies/top10RatedMovies', methods=['GET'])
 def top10RatedMovies():
     try:
+        log_request_response_details(request)
         response = MovieView.top10RatedMovies()
-        log_request_response_details(request, response)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
@@ -121,8 +125,9 @@ def top10RatedMovies():
 @app.route('/api/movies/top10NewMovies', methods=['GET'])
 def top10NewMovies():
     try:
+        log_request_response_details(request)
         response = MovieView.top10NewMovies()
-        log_request_response_details(request, response)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
@@ -131,8 +136,9 @@ def top10NewMovies():
 @app.route('/api/movies/top10PerGenre/<string:genre>', methods=['GET'])
 def top10PerGenre(genre):
     try:
+        log_request_response_details(request)
         response = MovieView.top10PerGenre(genre)
-        log_request_response_details(request, response)
+        log_request_response_details(response)
         return response
     except Exception as e:
         raise e
