@@ -17,6 +17,7 @@ class MovieSchema(Schema):
     vote_count = fields.Int()
     video = fields.Boolean()
 
+
 class MovieResponseSchema(Schema):
     page = fields.Int()
     results = fields.Nested(MovieSchema(), many=True)

@@ -1,1 +1,9 @@
 *.cpython-310.pyc
+*.h5
+*.pickle
+*.csv
+*.pkl
+*.log
+*.xml
+*.idea
+.idea
