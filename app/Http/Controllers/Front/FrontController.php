@@ -63,7 +63,7 @@ class FrontController extends Controller
 
         if(Auth::check()){
             $recommendMovies = Http::withToken(config('services.tmdb.token'))
-                ->get('http://127.0.0.1:5000/api/movies/top10NewMovies')
+                ->get('http://127.0.0.1:5000/api/recommendation/perUser/'.Auth::user()->id)
                 ->json(['results']);
             $viewModel = new MoviesRecommendViewModel(
                 $recommendMovies,
@@ -284,10 +284,11 @@ class FrontController extends Controller
     public function show($id)
     {
 
-        $popularMovies = Http::withToken(config('services.tmdb.token'))
-        ->get('https://api.themoviedb.org/3/movie/popular')
+        $similarMovie = Http::withToken(config('services.tmdb.token'))
+        ->get('http://127.0.0.1:5000/api/recommendation/perMovie/'.$id)
         ->json(['results']);
 
+        // dd($id);
         $movie = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/movie/'.$id.'?append_to_response=credits,videos,images')
             ->json();
@@ -295,7 +296,7 @@ class FrontController extends Controller
         $genres = Http::withToken(config('services.tmdb.token'))
             ->get('https://api.themoviedb.org/3/genre/movie/list')
             ->json(['genres']);
-        $viewModel = new MovieViewModel($movie,$popularMovies,$genres);
+        $viewModel = new MovieViewModel($movie,$similarMovie,$genres);
 
         return view('front.pages.show', $viewModel);
     }
