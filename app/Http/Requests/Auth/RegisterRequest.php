@@ -30,4 +30,16 @@ class RegisterRequest extends FormRequest
             'password' => 'required|min:6|max:191'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'password.min'             => 'The password field must have at least 6 characters.',
+        ];
+    }
 }

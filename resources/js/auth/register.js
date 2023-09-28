@@ -15,14 +15,14 @@ window.addEventListener('load', ()=> {
                             location.href = "./login";
                         })
                 }else{
-                    Swal.fire('Erro!',response.message, 'error')
+                    Swal.fire('Error!',response.message, 'error')
                 }
             })
             .catch((error) => {
                 if(error.status === 500){
-                    Swal.fire('Erro!', 'Erro ao abrir sua conta!', 'error');
+                    Swal.fire('Error!', 'Erro ao abrir sua conta!', 'error');
                 }else{
-                    Swal.fire('Erro!', error.response.data.message, 'error');
+                    Swal.fire('Error!', error.response.data.message, 'error');
                 }
             })
     });

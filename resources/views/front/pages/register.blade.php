@@ -12,11 +12,11 @@
                             </a>
 
                             <div class="sign__group">
-								<input type="text" class="sign__input" placeholder="Nome" name="firstName" min="3" max="50" required>
+								<input type="text" class="sign__input" placeholder="Name" name="firstName" min="3" max="50" required>
 							</div>
 
                             <div class="sign__group">
-								<input type="text" class="sign__input" placeholder="Sobrenome" name="lastName" min="3" max="50" required>
+								<input type="text" class="sign__input" placeholder="last Name" name="lastName" min="3" max="50" required>
 							</div>
 
 							<div class="sign__group">

@@ -179,11 +179,11 @@
 
                 case "stripe":
                     showingError(error.error.message)
-                    Swal.fire('Erro!', error.error.message, 'error')
+                    Swal.fire('Error!', error.error.message, 'error')
                 break;
 
                 case "platform":
-                    Swal.fire('Erro!', error.error.message, 'error')
+                    Swal.fire('Error!', error.error.message, 'error')
                         .then(() => {
                             location.reload()
                         })

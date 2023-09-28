@@ -41,14 +41,14 @@ if(forms.length > 0) {
                     if(response.redirect == true){
                         return location.href = response.redirectUrl;
                     }
-                    Swal.fire('Erro!', response.data.message, 'error')
+                    Swal.fire('Error!', response.data.message, 'error')
                 }
             })
             .catch((error) => {
                 if(error.status === 500){
-                    Swal.fire('Erro!', 'Erro ao processar requisição!', 'error');
+                    Swal.fire('Error!', 'Erro ao processar requisição!', 'error');
                 }else{
-                    Swal.fire('Erro!', error.response.data.message, 'error');
+                    Swal.fire('Error!', error.response.data.message, 'error');
                 }
             });
         });

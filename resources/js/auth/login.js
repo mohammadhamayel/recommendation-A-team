@@ -18,14 +18,14 @@ window.addEventListener('load', ()=> {
                     }
 
                 }else{
-                    Swal.fire('Erro!',res.data.message, 'error')
+                    Swal.fire('Error!',res.data.message, 'error')
                 }
             })
             .catch(error => {
                 if(error.status === 401){
-                    Swal.fire('Erro!', 'Dados de login incorretos, tente novamente!', 'error');
+                    Swal.fire('Error!', 'Dados de login incorretos, tente novamente!', 'error');
                 }else{
-                    Swal.fire('Erro!', error.response.data.message, 'error');
+                    Swal.fire('Error!', error.response.data.message, 'error');
                 }
             })
 
