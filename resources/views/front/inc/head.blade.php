@@ -23,7 +23,8 @@
 	<meta name="description" content="">
 	<meta name="keywords" content="">
 	<meta name="author" content="Dmitry Volkov">
-	<title>{{$title ?? {{'Movies4U'}}</title>
+	<title>{{$title ?? 
+		'Movies4U'}}</title>
 
     @stack('head')
     @stack('styles')
