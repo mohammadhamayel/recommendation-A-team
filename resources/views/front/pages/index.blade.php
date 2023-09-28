@@ -101,7 +101,7 @@
                         <!-- content tabs nav -->
                         <ul class="nav nav-tabs content__tabs" id="content__tabs" role="tablist">
                             <li class="nav-item" onClick="getGenre('drama')">
-                                <a class="nav-link active" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-1" aria-selected="true" data="Drama">Drama</a>
+                                <a class="nav-link active" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-1" aria-selected="true">Drama</a>
                             </li>
 
                             <li class="nav-item" onClick="getGenre('comedy')">
@@ -145,19 +145,50 @@
                         <!-- content mobile tabs nav -->
                         <div class="content__mobile-tabs" id="content__mobile-tabs">
                             <div class="content__mobile-tabs-btn dropdown-toggle" role="navigation" id="mobile-tabs" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <input type="button" value="New releases">
+                                <input type="button" value="Drama">
                                 <span></span>
                             </div>
 
                             <div class="content__mobile-tabs-menu dropdown-menu" aria-labelledby="mobile-tabs">
                                 <ul class="nav nav-tabs" role="tablist">
-                                    <li class="nav-item"><a class="nav-link active" id="1-tab" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">NEW RELEASES</a></li>
+                                    <li class="nav-item" onClick="getGenre('drama')">
+                                        <a class="nav-link active" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-1" aria-selected="true">Drama</a>
+                                    </li>
 
-                                    <li class="nav-item"><a class="nav-link" id="2-tab" data-toggle="tab" href="#tab-2" role="tab" aria-controls="tab-2" aria-selected="false">MOVIES</a></li>
+                                    <li class="nav-item" onClick="getGenre('comedy')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-2" aria-selected="false">Comedy</a>
+                                    </li>
 
-                                    <li class="nav-item"><a class="nav-link" id="3-tab" data-toggle="tab" href="#tab-3" role="tab" aria-controls="tab-3" aria-selected="false">TV SERIES</a></li>
+                                    <li class="nav-item" onClick="getGenre('thriller')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-3" aria-selected="false">Thriller</a>
+                                    </li>
 
-                                    <li class="nav-item"><a class="nav-link" id="4-tab" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">CARTOONS</a></li>
+                                    <li class="nav-item" onClick="getGenre('romance')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Romance</a>
+                                    </li>
+                                    <li class="nav-item" onClick="getGenre('action')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Action</a>
+                                    </li>
+
+                                    <li class="nav-item" onClick="getGenre('horror')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Horror</a>
+                                    </li>
+
+                                    <li class="nav-item" onClick="getGenre('documentary')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Documentary</a>
+                                    </li>
+
+                                    <li class="nav-item" onClick="getGenre('crime')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Crime</a>
+                                    </li>
+
+                                    <li class="nav-item" onClick="getGenre('adventure')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Adventure</a>
+                                    </li>
+
+                                    <li class="nav-item" onClick="getGenre('children')">
+                                        <a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Children</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -241,14 +272,12 @@
 <script>
 
     function getGenre(genreName){
+        showLoader();
         $.post('{{ route('front.genre.getmovie') }}', {_token:'{{ csrf_token() }}', genreName:genreName}, function(data){
-            console.log('data',data.data.genreMovies);
-            let movieArray = data.data.genreMovies;
-            // var html = '';
-            // Array.prototype.forEach.call(movieArray, movie => {
-            // });
-            // console.log(html);
-
+            if(data.html){
+                $("#carousel1 .owl-stage-outer .owl-stage").html(data.html);
+            }
+            hideLoader();
         });
     }
 

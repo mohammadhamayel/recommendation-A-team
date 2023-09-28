@@ -305,7 +305,7 @@ class FrontController extends Controller
             'rating' => $rate,
             'recommendedMovies' => '',
         ];
-        dd($data);
+
         $response = Http::post('http://127.0.0.1:5000/api/userLog/add', $data);
         
         return array(
@@ -327,18 +327,16 @@ class FrontController extends Controller
         $genreMovie = Http::withToken(config('services.tmdb.token'))
          ->get('http://127.0.0.1:5000/api/movies/top10PerGenre/'.$genreName)
          ->json(['results']);
-
+         if(!$genreMovie){
+            return response()->json(false);;
+         }
 
         $genres = Http::withToken(config('services.tmdb.token'))
         ->get('https://api.themoviedb.org/3/genre/movie/list')
         ->json(['genres']);
 
         $viewModel = new GenreViewModel($genreMovie,$genres);
-
-        return array(
-            'status' => 1,
-            'message' => "success",
-            'data'=>$viewModel
-        );
+        $viewRendered = view('components.moviecardPerGenre', compact('viewModel'))->render();
+        return response()->json(['html'=>$viewRendered]);
     }
 }

@@ -20,7 +20,7 @@ class GenreViewModel extends ViewModel
 
      // Getters
     public function genreMovies(){
-        return $this->formatMovies($this->similars);
+        return $this->formatMovies($this->genreMovies);
     }
 
     // new added

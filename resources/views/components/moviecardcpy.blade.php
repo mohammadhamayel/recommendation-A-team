@@ -1,5 +1,5 @@
-            <!-- Column -->
-            <div class="my-1 px-1 lg:my-6">
+        <!-- Column -->
+        <div class="my-1 px-1 lg:my-6">
             <!-- Article -->
             <article class="overflow-hidden rounded-lg shadow-lg h-full">
 

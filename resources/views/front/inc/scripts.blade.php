@@ -11,6 +11,7 @@
 <script src="{{asset('front/js/photoswipe.min.js')}}"></script>
 <script src="{{asset('front/js/photoswipe-ui-default.min.js')}}"></script>
 <script src="{{asset('front/js/main.js')}}"></script>
+<script src="{{asset('front/js/custom.js')}}"></script>
 @vite('resources/js/app.js')
 @stack('scripts')
 

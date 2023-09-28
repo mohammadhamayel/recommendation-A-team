@@ -19,7 +19,7 @@
 
 
                         <!-- dropdown -->
-                        <li class="header__nav-item">
+                        <li class="header__nav-item d-none">
                             <a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog <i class="icon ion-ios-arrow-down"></i></a>
 
                             <ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuHome">
@@ -38,12 +38,12 @@
 
                         @auth()
                             <!-- dropdown -->
-                            <li class="header__nav-item">
+                            <li class="header__nav-item d-none">
                                 <a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My account <i class="icon ion-ios-arrow-down"></i></a>
 
                                 <ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuHome">
                                     <li><a href="{{route('front.auth.profile')}}">My profile</a></li>
-                                    <li><a href="#">My videos</a></li>
+                                    <!-- <li><a href="#">My videos</a></li> -->
                                 </ul>
                             </li>
                             <!-- end dropdown -->
@@ -56,11 +56,11 @@
                     <!-- header auth -->
                     <div class="header__auth">
                         <form action="#" class="header__search">
-                            <input class="header__search-input" type="text" placeholder="Pesquisar...">
-                            <button class="header__search-button" type="button">
+                            <input class="header__search-input d-none" type="text" placeholder="Pesquisar...">
+                            <button class="header__search-button d-none" type="button">
                                 <i class="icon ion-ios-search"></i>
                             </button>
-                            <button class="header__search-close" type="button">
+                            <button class="header__search-close d-none" type="button">
                                 <i class="icon ion-md-close"></i>
                             </button>
                         </form>

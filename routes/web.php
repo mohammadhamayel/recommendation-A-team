@@ -38,7 +38,6 @@ Route::group([
         });
 
     });
-
     // Auth/Register User - Routes
     Route::get('/login', [FrontController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('do.login');
@@ -47,16 +46,17 @@ Route::group([
     Route::get('/esqueci-minha-senha', [FrontController::class, 'forgetPassword'])->name('forget-password');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    //Checkout routes
-    Route::get('checkout/{plan}', [FrontController::class, 'checkout'])->name('checkout');
-    Route::post('checkout/process', [FrontController::class, 'checkoutProcess'])->name('checkout.process');
-
-    // movies routes
-    Route::get('/movies/{id}',  [FrontController::class, 'show'])->name('movies.show');
-
+    Route::group([
+        'middleware' => 'user.log',
+    ], function(){
+        //Checkout routes
+        Route::get('checkout/{plan}', [FrontController::class, 'checkout'])->name('checkout');
+        Route::post('checkout/process', [FrontController::class, 'checkoutProcess'])->name('checkout.process');
+        // movies routes
+        Route::get('/movies/{id}',  [FrontController::class, 'show'])->name('movies.show');
+        Route::post('/movies/genreMovies',  [FrontController::class, 'getMoviesPerGenre'])->name('genre.getmovie');
+    });
     Route::post('/movies/rate',  [FrontController::class, 'rate'])->name('movies.rate');
-
-    Route::post('/movies/genreMovies',  [FrontController::class, 'getMoviesPerGenre'])->name('genre.getmovie');
 
 });
 

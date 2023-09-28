@@ -9,6 +9,9 @@
 
 	@include('front.inc.footer')
     @include('front.inc.scripts')
+	<div id="loaderContainer" class="">
+		<div id="loader"></div>
+	<div>
 </body>
 
 </html>
