@@ -31,7 +31,7 @@
                         <!-- end dropdown -->
 
                         @guest()
-                            <li class="header__nav-item">
+                            <li class="header__nav-item d-none">
                                 <a href="#" class="header__nav-link">Plans</a>
                             </li>
                         @endguest
