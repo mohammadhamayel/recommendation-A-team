@@ -31,9 +31,9 @@
                         <p class="text-gray-600 mt-3">
                             {{ $movie['overview'] }}
                         </p>
-                        <div class="mt-5">
-                            <h4 class="text-teal-400">Featured Cast</h4>
-                            <div class="row m-0 mt-3 text-gray-600">
+                        <div class="mt-4">
+                            <h4 class="text-teal-400 fs-24">Featured Cast</h4>
+                            <div class="row m-0 mt-2 text-gray-600">
                                 @foreach ($movie['featuredCast'] as $cast)
                                         <div class="mr-3">
                                             <div>{{ $cast['name'] }}</div>
@@ -41,8 +41,8 @@
                                 @endforeach
                             </div>
                         <div class="mt-4">
-                            <h4 class="text-teal-400">Crew</h4>
-                            <div class="row m-0 mt-3 text-gray-600">
+                            <h4 class="text-teal-400 fs-24">Crew</h4>
+                            <div class="row m-0 mt-2 text-gray-600">
                                 @foreach ($movie['crew'] as $crew)
                                         <div class="mr-3">
                                             <div>{{ $crew['name'] }}</div>
@@ -51,8 +51,8 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="mt-5">
-                            <h4 class="text-teal-400">Rate Me</h4>
+                        <div class="mt-4">
+                            <h4 class="text-teal-400 fs-24">Rate Me</h4>
                             <div class="rating mt-2">
                                 <i class="rating__star far fa-star" onclick="getStars()"></i>
                                 <i class="rating__star far fa-star" onclick="getStars()"></i>

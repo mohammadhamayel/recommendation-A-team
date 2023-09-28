@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Http;
 use App\ViewModels\MoviesViewModel;
 use App\ViewModels\MovieViewModel;
 use App\ViewModels\GenreViewModel;
+use App\ViewModels\MoviesRecommendViewModel;
 
 class FrontController extends Controller
 {
@@ -60,14 +61,26 @@ class FrontController extends Controller
             ->get('http://127.0.0.1:5000/api/movies/top10PerGenre/drama')
             ->json()['results'];
 
-
-        $viewModel = new MoviesViewModel(
-            $popularMovies,
-            $nowPlayingMovies,
-            $genres,
-            $firstGenre
-        );
-
+        if(Auth::check()){
+            $recommendMovies = Http::withToken(config('services.tmdb.token'))
+                ->get('http://127.0.0.1:5000/api/movies/top10NewMovies')
+                ->json(['results']);
+            $viewModel = new MoviesRecommendViewModel(
+                $recommendMovies,
+                $popularMovies,
+                $nowPlayingMovies,
+                $genres,
+                $firstGenre
+            );
+        }else{
+            $viewModel = new MoviesViewModel(
+                $popularMovies,
+                $nowPlayingMovies,
+                $genres,
+                $firstGenre
+            );
+        }
+        
         if(!$request->session()->get('temp_user_id')){
             $randNum = time() + rand() ;
             $request->session()->put('temp_user_id', intval(substr(time() + rand(),0,9)));

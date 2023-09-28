@@ -21,7 +21,7 @@
                     <div class="owl-carousel recommend__carousel recommend__carousel--bg" id="recommend_videos">
                         {{-- Popular/Trending Movie Single container --}}
                             {{-- Dynamic Content From TMDB API --}}
-                        @foreach ($popularMovies as $movie)
+                        @foreach ($recommendMovies as $movie)
                             <x-MovieCardCpy :movie="$movie"/>
                         @endforeach
                     </div>

@@ -43,7 +43,7 @@ class AuthController extends Controller
 
             return response()->json(['success' => true, 'message' => 'Success'], 200);
         }else{
-            return response()->json(['success' => false, 'message' => 'Usuário ou senha inválidos'], 401);
+            return response()->json(['success' => false, 'message' => 'username or password is invalid'], 401);
         }
 
     }
