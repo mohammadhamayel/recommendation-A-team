@@ -37,3 +37,7 @@ recommendedSimilarMoviesQuery = """
 genreByMovieIdMoviesQuery = """
             SELECT genres FROM movies where movieId=:movieId
         """
+
+movieIdbyTmdbMoviesQuery = """
+            SELECT movieId FROM movies where tmdbId= :tmdbId
+        """

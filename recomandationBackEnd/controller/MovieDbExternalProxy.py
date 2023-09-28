@@ -1,6 +1,7 @@
 import requests
 from flask import jsonify
 
+from recomandationBackEnd.loaders.logger_config import logger
 from recomandationBackEnd.model.MovieExternalInfoModel import MovieExternalModel, Genre, ProductionCompany, \
     ProductionCountry, SpokenLanguage
 
@@ -14,6 +15,7 @@ def get_movie_info(tmdbId):
     }
 
     # Make the API call
+    logger.info(f'Calling External Themoviedb API : {tmdbId}')
     response = requests.get(url, headers=headers)
 
     # Check if the request was successful (status code 200)
@@ -50,6 +52,8 @@ def get_movie_info(tmdbId):
             vote_count=json_data["vote_count"]
 
         )
+        logger.info(f'Response External {tmdbId} Themoviedb API : {movie_info}')
         return movie_info
     else:
+        logger.info(f'Problem Response External {tmdbId} Themoviedb API')
         return jsonify({'error': 'Failed to fetch movie information'}), response.status_code

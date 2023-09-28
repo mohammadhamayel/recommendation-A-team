@@ -8,8 +8,8 @@ class UserLog(db.Model):
     logId = db.Column(db.Integer, primary_key=True, autoincrement=True)
     userId = db.Column(db.Integer, nullable=True)
     actionEvent = db.Column(db.String(255), nullable=True)
-    movieId = db.Column(db.Integer, nullable=True)
-    rating = db.Column(db.Float, nullable=True)
+    movieId = db.Column(db.String(255), nullable=True)
+    rating = db.Column(db.String(255), nullable=True)
     recommendedMovies = db.Column(db.String(255), nullable=True)
     eventTime = db.Column(db.TIMESTAMP, nullable=False, default=func.current_timestamp())
 

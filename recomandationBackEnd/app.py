@@ -30,7 +30,7 @@ def before_first_request():
 
     try:
         # Load CSV data into a Pandas DataFrame
-        data_path = "F:/DataScience/AncaondaWorkspace/GZG/FinalProjectRecommanded/refined_dataset_nn.csv"
+        data_path = "./refined_dataset_nn.csv"
         refined_dataset_nn = load_data(data_path)
 
         # Load the recommendation model (load it only once)

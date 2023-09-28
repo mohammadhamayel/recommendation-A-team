@@ -86,12 +86,22 @@ def recommendedUserMovies(user_id, data, user_enc, rec_model):
     return fetch_movie_data(MovieQueries.recommendedUserMoviesQuery, 0, params=params)
 
 
-def recommendedSimilarMovies(movieId, refined_dataset_nn, knn_similar_movie_model, movie_to_user_df, movies_list,
+def recommendedSimilarMovies(tmdbId, refined_dataset_nn, knn_similar_movie_model, movie_to_user_df, movies_list,
                              movie_dict):
-    logger.info(movie_dict)
-    logger.info(movieId)
-    if movieId not in movie_dict:
+    # movie id received is the tmdbid, so we need to convert it to our movieId
+    if tmdbId:
+        movieId = get_movie_id_by_tmdb_id(tmdbId)
+        logger.info(f'get_movie_id_by_tmdb_id Result : --> {movieId}')
+    else:
         return MovieResponse(page=1, results=[], total_pages=0, total_results=0)
+
+    if movieId not in movie_dict:
+        genre_list = get_genres_by_movie_id(movieId)
+        if genre_list:
+            params = {'genre': genre_list[0]}
+            return fetch_movie_data(MovieQueries.top10PerGenreQuery, 4, params=params)
+        else:
+            return MovieResponse(page=1, results=[], total_pages=0, total_results=0)
 
     index = movie_dict[movieId]
     knn_input = np.asarray([movie_to_user_df.values[index]])
@@ -134,3 +144,19 @@ def get_genres_by_movie_id(movie_id):
             genre_list = genres.split('|')
 
     return genre_list
+
+
+def get_movie_id_by_tmdb_id(tmdbId):
+    logger.info(f'get_movie_id_by_tmdb_id --> {tmdbId}')
+    params = {'tmdbId': tmdbId}
+    engine = db.get_engine()
+
+    with engine.connect() as connection:
+        result = connection.execute(text(MovieQueries.movieIdbyTmdbMoviesQuery).params(**params))
+
+        movie_id = None
+
+        for row in result:
+            movie_id = row[0]
+
+    return movie_id
