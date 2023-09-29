@@ -197,16 +197,16 @@
                 <div class="col-12">
                     <h1 class="home__title"><b>Similar</b> Movies</h1>
 
-                    <button class="recommend__nav recommend__nav--prev" type="button" data-nav="#recommend_videos">
+                    <button class="similar__nav similar__nav--prev" type="button" data-nav="#similar_videos">
                         <i class="icon ion-ios-arrow-round-back"></i>
                     </button>
-                    <button class="recommend__nav recommend__nav--next" type="button" data-nav="#recommend_videos">
+                    <button class="similar__nav similar__nav--next" type="button" data-nav="#similar_videos">
                         <i class="icon ion-ios-arrow-round-forward"></i>
                     </button>
                 </div>
 
                 <div class="col-12">
-                    <div class="owl-carousel recommend__carousel recommend__carousel--bg" id="recommend_videos">
+                    <div class="owl-carousel similar__carousel similar__carousel--bg" id="similar_videos">
                         {{-- Popular/Trending Movie Single container --}}
                             {{-- Dynamic Content From TMDB API --}}
                         @foreach ($popularMovies as $movie)

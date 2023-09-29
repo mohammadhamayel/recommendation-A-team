@@ -160,3 +160,22 @@
     }
     
  }
+
+    
+@media screen and (max-width:450px) {
+    .home__title {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .home .similar__carousel .owl-stage-outer {
+        width: 381px;
+    }
+}
+
+@media screen and (max-width:380px) {
+    .home .similar__carousel .owl-stage-outer {
+        width: 334px;
+    }
+}
