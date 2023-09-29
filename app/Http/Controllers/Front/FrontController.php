@@ -331,8 +331,10 @@ class FrontController extends Controller
         ];
 
         $response = Http::post('http://127.0.0.1:5000/api/userLog/add', $data);
-        if($response['code'] != 0){
+
+        if(!isset($response['code']) || $response['code'] != 0){
             Log::error('user rating', ['Error' => 'user not synced!', 'user' => $response]);
+            dd(166515);
         }
         return array(
             'status' => 1,
