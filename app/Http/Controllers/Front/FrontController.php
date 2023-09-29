@@ -296,7 +296,7 @@ class FrontController extends Controller
         // ->get('https://api.themoviedb.org/3/movie/popular')
         // ->json(['results']);
         $similarMovies = Http::withToken(config('services.tmdb.token'))
-        ->get('http://127.0.0.1:5000/api/recommendation/perMovie/',$id)
+        ->get('http://127.0.0.1:5000/api/recommendation/perMovie/'.$id)
         ->json(['results']);
         
         $movie = Http::withToken(config('services.tmdb.token'))
